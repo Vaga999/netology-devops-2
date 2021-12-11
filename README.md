@@ -28,7 +28,8 @@
 	Connection closed by foreign host.   
 
 Ошибка 400 Bad Request означает, что сервер (удалённый компьютер) не может обработать запрос, отправленный клиентом (браузером), вследствие проблемы, которая трактуется сервером как проблема на стороне клиента.  
-
+### UPD. Вот скрин, при отправке GET висит и сообщает о закрытом подключении.
+![](https://s283vla.storage.yandex.net/rdisk/80fb80f2d1173792c76c5cd2f2740ca5363bf81d016de7179d71aacc57c85889/61b4d69c/-yg_cLuuhfuAgJu7cu40CuECvUhv8AYD4sBDa2tUFeL8zkhT7bBtHzmUf0zr5mRg9AAbi_cMWOin0VIUgV2Evg==?uid=160010782&filename=UPD.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=160010782&fsize=434769&hid=1674d7e941636baa6c0f5a116caa612c&media_type=image&tknv=v2&etag=546d585dd6b485ba584ccdf05a3f41a0&rtoken=IjKWjTvA3cNL&force_default=yes&ycrid=na-d9291e325a7cf102ce19288465ccd195-downloader20f&ts=5d2e19faddf00&s=0463510440e9810fd3a834790047f674353e00450a3842f2e815c25dbc6b3d8b&pb=U2FsdGVkX1_5SivGq1XIYIkBgS5X_S_YMjzUd_NaoyM-mou_0SS5o1iMWMEWECPs59h3wT6EDXlwzr7HJEEiaSY8poGSQzzmSiJM2QPEKeY)  
 ## 2. Повторите задание 1 в браузере, используя консоль разработчика F12.  
 
     откройте вкладку Network  
