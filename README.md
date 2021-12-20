@@ -1,176 +1,141 @@
-# Домашнее задание к занятию 3.6. Компьютерные сети, лекция 1  
+# Домашнее задание к занятию 3.6. Компьютерные сети, лекция 2  
 
-## 1. Работа c HTTP через телнет.  
+## 1. Проверьте список доступных сетевых интерфейсов на вашем компьютере. Какие команды есть для этого в Linux и в Windows?  
 
-    Подключитесь утилитой телнет к сайту stackoverflow.com telnet stackoverflow.com 80  
-    отправьте HTTP запрос   
+Для командной строки Windows можно использовать:  
+ipconfig -all  
+netstat или netstat -n  
+route PRINT  
 
-	GET /questions HTTP/1.0   
-	HOST: stackoverflow.com   
-	[press enter]   
-	[press enter]   
+из PowerShell (модуль NetTCPIP):    
+Get-NetAdapter   
 
-    В ответе укажите полученный HTTP код, что он означает?   
-
-Отправлено :  
-	telnet stackoverflow.com 80  
-	Trying 151.101.1.69...  
-	Connected to stackoverflow.com.  
-	Escape character is '^]'.  
-	GET /questions HTTP/1.0  
-	HOST: stackoverflow.com  
-
-получено :  
-	HTTP/1.1 400 Bad Request  
-	Connection: close  
-	Content-Length: 0  
-
-	Connection closed by foreign host.   
-
-Ошибка 400 Bad Request означает, что сервер (удалённый компьютер) не может обработать запрос, отправленный клиентом (браузером), вследствие проблемы, которая трактуется сервером как проблема на стороне клиента.  
-### UPD. Вот скрин, при отправке GET висит и сообщает о закрытом подключении.
-![](https://s283vla.storage.yandex.net/rdisk/80fb80f2d1173792c76c5cd2f2740ca5363bf81d016de7179d71aacc57c85889/61b4d69c/-yg_cLuuhfuAgJu7cu40CuECvUhv8AYD4sBDa2tUFeL8zkhT7bBtHzmUf0zr5mRg9AAbi_cMWOin0VIUgV2Evg==?uid=160010782&filename=UPD.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=160010782&fsize=434769&hid=1674d7e941636baa6c0f5a116caa612c&media_type=image&tknv=v2&etag=546d585dd6b485ba584ccdf05a3f41a0&rtoken=IjKWjTvA3cNL&force_default=yes&ycrid=na-d9291e325a7cf102ce19288465ccd195-downloader20f&ts=5d2e19faddf00&s=0463510440e9810fd3a834790047f674353e00450a3842f2e815c25dbc6b3d8b&pb=U2FsdGVkX1_5SivGq1XIYIkBgS5X_S_YMjzUd_NaoyM-mou_0SS5o1iMWMEWECPs59h3wT6EDXlwzr7HJEEiaSY8poGSQzzmSiJM2QPEKeY)  
-## 2. Повторите задание 1 в браузере, используя консоль разработчика F12.  
-
-    откройте вкладку Network  
-    отправьте запрос http://stackoverflow.com  
-    найдите первый ответ HTTP сервера, откройте вкладку Headers  
-    укажите в ответе полученный HTTP код.  
-    проверьте время загрузки страницы, какой запрос обрабатывался дольше всего?  
-    приложите скриншот консоли браузера в ответ.  
-
-Судя по всему первый ответ это самый нижний в списке, он же и самый долгий  
-
-полученный HTTP код:  
-Код статуса: 200  
-
-!(https://s340vla.storage.yandex.net/rdisk/ffbb0e5058db9bf87bacc0cb49fcda03873e7232844fcdc6b5736d6f8cb9d2fd/61b3ad70/-yg_cLuuhfuAgJu7cu40Cr0wIPFEDGlEQonyxou-em7oilnBfKKvKRKBhvA1cRudBZmur62A5S9hEXmtMCpfpg==?uid=160010782&filename=2%D0%B9%201.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=160010782&fsize=478695&hid=c1278e90ad3dfac4a82824fd2f469b32&media_type=image&tknv=v2&etag=2b56a78f7106b8e64aba46183f75edc2&rtoken=RUodiry8sSD6&force_default=yes&ycrid=na-12b953469e98363c7499c6b0b2751344-downloader8h&ts=5d2cfe9323c00&s=e631d2fa5b13aeae8f5fcf0a769620c18b7f85bacc4f53fee45bfd18d57ed78a&pb=U2FsdGVkX1_ZP-tL8VM4QctgdH0nmf5cQgULkBMQfQzn1kSvBWX_mqKDdW3BY10bNCIC9HE0X7IQ45DizNieNtTHZpeQSw-vP9kD5Xna8ew)  
-!(https://s316sas.storage.yandex.net/rdisk/8e8411eea0069e7b447e832f304526e2c284c84920fd2b379c57b1c8b001418d/61b3ad88/-yg_cLuuhfuAgJu7cu40CuECvUhv8AYD4sBDa2tUFeL8zkhT7bBtHzmUf0zr5mRg9AAbi_cMWOin0VIUgV2Evg==?uid=160010782&filename=2%D0%B9.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=160010782&fsize=434769&hid=1674d7e941636baa6c0f5a116caa612c&media_type=image&tknv=v2&etag=546d585dd6b485ba584ccdf05a3f41a0&rtoken=WEZhWqCjB0aK&force_default=yes&ycrid=na-dc94bf7c56d0ff41e89303b47390fd6b-downloader8h&ts=5d2cfeaa07200&s=ac4a13b4da2b259e9b9de01b6db9368189065bf900ca2669d78fe77736a3312e&pb=U2FsdGVkX19aA5Hve5_3Q6Dz4XedlPlMJNRPaur7VcjFV3UovuF0HKRI1QLiFcIA8GXsKwKlYjpmaBHIcls4zR0hzNiN9RqQrajByH25S0Q)  
-
-## 3. Какой IP адрес у вас в интернете?    
-взят с помощью сервиса https://pr-cy.ru/  
-92.63.69.9  
-
-## 4. Какому провайдеру принадлежит ваш IP адрес? Какой автономной системе AS? Воспользуйтесь утилитой whois  
-
-Какому провайдеру принадлежит ваш IP адрес?    
-	organisation:   ORG-TSU2-RIPE    
-	org-name:       Tomsk State University    
-Какой автономной системе AS?  
-	AS8510    
- 
-
-## 5. Через какие сети проходит пакет, отправленный с вашего компьютера на адрес 8.8.8.8? Через какие AS? Воспользуйтесь утилитой traceroute.   
-В [AS*****] указаны AS  
-sudo traceroute -AnI 8.8.8.8  
-traceroute to 8.8.8.8 (8.8.8.8), 30 hops max, 60 byte packets  
- 1  10.0.2.2 [*]  0.106 ms  0.123 ms  0.088 ms  
- 2  192.168.0.1 [*]  0.998 ms  1.018 ms  1.040 ms  
- 3  172.16.0.1 [*]  10.462 ms  11.464 ms  11.540 ms  
- 4  92.63.69.1 [AS8510]  3.310 ms  3.389 ms  3.471 ms  
- 5  92.63.65.226 [AS8510]  2.395 ms  2.411 ms  2.507 ms  
- 6  92.63.65.98 [AS8510]  2.520 ms  1.210 ms  1.330 ms  
- 7  82.200.1.209 [AS21127]  4.210 ms  1.765 ms  1.740 ms  
- 8  217.150.44.42 [AS20485]  6.792 ms  7.005 ms  7.084 ms  
- 9  188.43.29.74 [AS20485]  5.601 ms  5.569 ms  5.602 ms  
-10  188.43.29.49 [AS20485]  5.972 ms  6.227 ms  6.335 ms  
-11  217.150.55.234 [AS20485]  41.074 ms  41.042 ms  49.631 ms  
-12  188.43.10.141 [AS20485]  50.346 ms  50.416 ms  42.058 ms  
-13  108.170.250.66 [AS15169]  44.287 ms  44.388 ms  44.409 ms  
-14  * 209.85.255.136 [AS15169]  62.041 ms  62.074 ms  
-15  172.253.65.82 [AS15169]  61.473 ms  61.751 ms  61.654 ms  
-16  172.253.51.221 [AS15169]  61.959 ms  62.097 ms  61.988 ms  
-17  * * *  
-18  * * *  
-19  * * *  
-20  * * *  
-21  * * *  
-22  * * *  
-23  * * *  
-24  * * *  
-25  * * *  
-26  8.8.8.8 [AS15169]  53.343 ms  54.770 ms  54.960 ms  
+В Linux:   
+ip link show  
+ip addr  
+ip -s link   
+Эти команды еще и показывают состояяние интерфейса.  
+![](https://s325vla.storage.yandex.net/rdisk/5b951395a12ce04aef52c1dbc8b25a31f7e5315dabbc939ee151111b293fc2f8/61c0d12b/-yg_cLuuhfuAgJu7cu40ChHLLBSagJp3ufWvsC_Y5Z9FE0_fYEKnT3uuhNzRcCqlPKEZyNjG7Yy0-DUzhQDu1g==?uid=160010782&filename=1%D0%B9.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=160010782&fsize=203638&hid=4451163d590515955caca016d0495b4c&media_type=image&tknv=v2&etag=9786a6cd2617cd2e145eaf54dc8ffa6e&rtoken=QlSj1TEUAozB&force_default=yes&ycrid=na-068796d571540bf6de690f4b1badf775-downloader5f&ts=5d39867a660c0&s=88e67a1e888dbbd8502fd4279672e98de95a966dd9a123188b46ae2e1ecc295a&pb=U2FsdGVkX1-It4GvXULqDypHc6sEWSsGV2jmmG_0HWKkQFpLuvj04tnbfQz0fRtdTC2aJz0KBX5Z3qfz3ReFDK7FdudhoFOEd1cZA3afdvE)  
 
 
-## 6.Повторите задание 5 в утилите mtr. На каком участке наибольшая задержка - delay?    
-Наибольшая задержка на этом участке:    
- 7. ge0-1-59.ll-tmk.zsttk.ru                              0.0%     9    9.5  42.5   4.5 208.3  71.7  
+так же :   
+ls /sys/class/net    
+cat /proc/net/dev   
 
-                                       My traceroute  [v0.93]  
-vagrant (10.0.2.15)                                                        2021-12-10T08:45:52+0000  
-Keys:  Help   Display mode   Restart statistics   Order of fields   quit  
-                                                           Packets               Pings  
- Host                                                    Loss%   Snt   Last   Avg  Best  Wrst StDev  
- 1. _gateway                                              0.0%     9    0.1   0.1   0.1   0.2   0.0  
- 2. 192.168.0.1                                           0.0%     9    0.6   0.6   0.6   0.8   0.1  
- 3. 172.16.0.1                                            0.0%     9    5.9   7.3   2.9  11.2   2.9  
- 4. 92.63.69.1                                            0.0%     9    1.3   3.7   1.2  17.8   5.4  
- 5. 92.63.65.226                                          0.0%     9    1.6   1.7   1.2   2.9   0.5  
- 6. 92.63.65.98                                           0.0%     9    1.9   1.7   1.3   2.0   0.2  
- 7. ge0-1-59.ll-tmk.zsttk.ru                              0.0%     9    9.5  42.5   4.5 208.3  71.7  
- 8. tmk01.transtelecom.net                                0.0%     9   11.1  10.6   7.2  16.7   3.5  
- 9. BL-gw.transtelecom.net                                0.0%     8    8.9  10.1   6.1  14.7   3.2  
-10. BL-gw.transtelecom.net                                0.0%     8    9.3  12.2   7.6  16.6   3.3  
-11. mskn15-Lo1.transtelecom.net                           0.0%     8   51.7  64.5  45.1  83.1  15.9  
-12. Google-gw.transtelecom.net                            0.0%     8   50.9  45.4  40.5  50.9   3.9  
-13. 108.170.250.66                                        0.0%     8   51.4  48.9  44.7  53.6   2.8  
-14. 209.85.255.136                                       37.5%     8   53.7  56.3  53.7  59.7   2.4  
-15. 172.253.65.82                                         0.0%     8   53.2  65.4  53.2 100.9  15.5  
-16. 172.253.51.221                                        0.0%     8   64.7  63.4  58.9  66.8   3.1  
-17. (waiting for reply)  
-18. (waiting for reply)  
-19. (waiting for reply)  
-20. (waiting for reply)  
-21. (waiting for reply)  
-22. (waiting for reply)  
-23. (waiting for reply)  
-24. (waiting for reply)  
-25. (waiting for reply)  
-26. dns.google                                            0.0%     8   53.4  56.5  52.6  61.4   3.4  
-  
-## 7. Какие DNS сервера отвечают за доменное имя dns.google? Какие A записи? воспользуйтесь утилитой dig    
-Вроде так:  
-dig dns.google  
 
-; <<>> DiG 9.16.1-Ubuntu <<>> dns.google  
-;; global options: +cmd  
-;; Got answer:  
-;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 45542  
-;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1  
-  
-;; OPT PSEUDOSECTION:  
-; EDNS: version: 0, flags:; udp: 65494  
-;; QUESTION SECTION:  
-;dns.google.                    IN      A  
-  
-;; ANSWER SECTION:					А-записи это ниже:  
-dns.google.             837     IN      A       8.8.8.8  
-dns.google.             837     IN      A       8.8.4.4  
+## 2. Какой протокол используется для распознавания соседа по сетевому интерфейсу? Какой пакет и команды есть в Linux для этого?   
+Протоколы LLDP ,  NDP  
 
-;; Query time: 47 msec   
-;; SERVER: 127.0.0.53#53(127.0.0.53)  
-;; WHEN: Fri Dec 10 11:30:01 UTC 2021  
-;; MSG SIZE  rcvd: 71  
+Посмотреть можно например так:    
+sudo nmap -sn 192.xxx.xxx.xxx/xx  
 
-## 8. Проверьте PTR записи для IP адресов из задания 7. Какое доменное имя привязано к IP? воспользуйтесь утилитой dig    
+sudo arp-scan --interface=eth0 --localnet  
+![](https://s277vla.storage.yandex.net/rdisk/0f08073a557a1740acfbc41d959a94cc2cf4f535a0e937f1c8760b8d85203bee/61c0d13c/-yg_cLuuhfuAgJu7cu40CgsnrHWAuWQD0QU6yQav3_-_SYAuy5bkSujWv3gehcx3VugZO4uU-WMyilZD0edF7A==?uid=160010782&filename=2%D0%B9.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=160010782&fsize=147535&hid=61b6d9cf5ce6d84577c923d9f3c3273f&media_type=image&tknv=v2&etag=76f8ea2b54f203af3a465adf4846a1e3&rtoken=8QaaxWarWrUD&force_default=yes&ycrid=na-5571f0d425a3500244d6ef6cd8929e0c-downloader5f&ts=5d39868a9c700&s=060fa80ef4d4d83e6562295cd0cb1afe99b14ddb1bedd695ba1591da91120c88&pb=U2FsdGVkX1_DbRiM5TmhbCT0mRQwr7_fjYMH4XLlxixolRUbQzFxvmeo32qQxsNnRRrs10bporBwD_tSx8aXGz5Flx-EZXXojTnodFMxl9A)  
 
-dig -x 8.8.8.8  
 
-; <<>> DiG 9.16.1-Ubuntu <<>> -x 8.8.8.8  
-;; global options: +cmd  
-;; Got answer:  
-;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 34655  
-;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1  
+## 3. Какая технология используется для разделения L2 коммутатора на несколько виртуальных сетей? Какой пакет и команды есть в Linux для этого? Приведите пример конфига.  
 
-;; OPT PSEUDOSECTION:  
-; EDNS: version: 0, flags:; udp: 65494  
-;; QUESTION SECTION:  
-;8.8.8.8.in-addr.arpa.          IN      PTR  
+VLAN – виртуальное разделение коммутатора  
 
-;; ANSWER SECTION:					PTR-записи это ниже:  
-8.8.8.8.in-addr.arpa.   85351   IN      PTR     dns.google.  
+Список и настройки можно посмотреть здесь:  
+/etc/network/interfaces  
+мой пример(создает два vlan) :    
+auto eth0.100  
+iface eth0.100 inet static  
+   address 192.168.100.3  
+   netmask 255.255.255.0  
+   vlan_raw_device eth0  
 
-;; Query time: 47 msec  
-;; SERVER: 127.0.0.53#53(127.0.0.53)  
-;; WHEN: Fri Dec 10 13:43:00 UTC 2021  
-;; MSG SIZE  rcvd: 73  
+auto eth0.200  
+iface eth0.200 inet static  
+   address 192.168.200.3  
+   netmask 255.255.255.0  
+   vlan_raw_device eth0  
+
+![](https://s288vla.storage.yandex.net/rdisk/822609f74239a80b08a230ee99e31e0c6be2523c16c5673bb0c2e3c0f30b327a/61c0d14b/-yg_cLuuhfuAgJu7cu40Cq0d3In33MxFhNMSBjCjL47pzFSODICzp1U7JszO_0j9_4jgwurVU509-nFkNyj4SA==?uid=160010782&filename=3%D0%B9.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=160010782&fsize=251803&hid=75f4f7b6f2e967fc98e776e0fc6813d6&media_type=image&tknv=v2&etag=2ed06d358ef9442d0b02fc1d1842bff8&rtoken=xANVuPzHxDyh&force_default=yes&ycrid=na-26b55140b56626d6b4656de057a5b1c4-downloader5f&ts=5d398698ea8c0&s=2d719e052357a5ef28d7cb78b43afa63bbb0c89c244776943e5e0888f49dcfac&pb=U2FsdGVkX18BPkMFYTROUUYo3Q_Cbp4BoWgKnbPW-nP0CH78N-Ijk9iIuCxDQLOcPz2UE5T4TEzh1LNlfDsz_1GdzAbI9qjSvuCingCdjIk)   
+
+пакет vconfig  
+например:    
+vconfig add eth0 1678  мы добавили vlan для устройства eth0, и ид vlan будет 1678    
+Но этот способ не позволит создать vlan способный подняться носле перезагрузки системы  
+
+есть IPRoute2 (как я понял это более новое)  
+
+## 4. Какие типы агрегации интерфейсов есть в Linux? Какие опции есть для балансировки нагрузки? Приведите пример конфига.    
+
+Драйвер bonding ядра linux обеспечивает метод агрегации нескольких сетевых интерфейсов в единый логический bonded интерфейс. Поведение агрегированных ("bonded") интерфейсов зависит от режима ("mode").  
+
+Mode-0(balance-rr) В данном режиме сетевые пакеты отправляются “по кругу”, от первого интерфейса к последнему. Если выходят из строя интерфейсы, пакеты отправляются на остальные оставшиеся.   
+Mode-1(active-backup) Один из интерфейсов работает в активном режиме, остальные в ожидающем.   
+Mode-2(balance-xor) Передачи распределяются между интерфейсами на основе формулы ((MAC-адрес источника) XOR (MAC-адрес получателя)) % число интерфейсов. Один и тот же интерфейс работает с определённым получателем.   
+Mode-3(broadcast) Происходит передача во все объединенные интерфейсы, тем самым обеспечивая отказоустойчивость.   
+Mode-4(802.3ad)  динамическое объединение одинаковых портов.   
+Mode-5(balance-tlb)  Адаптивная балансировки нагрузки трафика. Входящий трафик получается только активным интерфейсом, исходящий распределяется в зависимости от текущей загрузки канала каждого интерфейса.  
+Mode-6(balance-alb) – Адаптивная балансировка нагрузки. Отличается более совершенным алгоритмом балансировки нагрузки чем Mode-5). Обеспечивается балансировку нагрузки как исходящего так и входящего трафика.   
+
+пример конфига(это из интернета, я пока не понял где брать address, gateway,netmask, network,dns-nameservers). система запускается, в устройствах появляется нужный нам bond0 но по ssh подключиться не могу.  
+содержимое /etc/network/interfaces:    
+auto eth0   
+iface eth0 inet manual   
+bond-master bond0   
+
+auto eth1   
+iface eth1 inet manual   
+bond-master bond0   
+
+auto bond0   
+iface bond0 inet static   
+address 10.200.6.8   
+gateway 10.200.6.6   
+netmask 255.255.255.0   
+network 10.200.6.0   
+dns-nameservers 10.200.6.6   
+bond-mode 0   
+bond-miimon 100   
+bond-slaves eth0 eth1  
+
+## 5. Сколько IP адресов в сети с маской /29 ? Сколько подсетей можно получить из сети с маской /24. Приведите несколько примеров /29 подсетей внутри сети 10.10.10.0/24.   
+
+#### Сколько IP адресов в сети с маской /29 ?    
+32-29=3(всего 32 бита, занято 29)  
+2^3=8(2 комбинации в степени = свободных бит )  
+8-2=6 (1й адрес сети, 2й для Broadcast)   
+
+#### Сколько /29 подсетей можно получить из сети с маской /24?    
+/24 это 255.255.255.0 >> 2^8=256  
+~~(всего рабочих адресов 256-2=254)  
+(на каждую подсеть нам надо минимум 3и ip следовательно 256/3=84,66; Но дробное нам не надо, берем число 84(сетей)  (поэтому будет 83 сети с 3мя адресами и +1 с 4мя адресами)).~~  
+Нам нужны подсети /29 это по 8 адресов(всего) есть 254 рабочих адреса(и 2а служебных), >>> 254/8=31,75  итого 31 подсеть(в одной из подсетей будет 9 аресов, а не 8).    
+
+#### Приведите несколько примеров /29 подсетей внутри сети 10.10.10.0/24.    
+
+диапазон(вместе со служебными) 10.10.10.2 - 10.10.10.10  
+маска 255.255.255.248  
+
+диапазон (вместе со служебными) 10.10.10.10 - 10.10.10.18  
+маска 255.255.255.248  
+
+## 6. Задача: вас попросили организовать стык между 2-мя организациями. Диапазоны 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 уже заняты. Из какой подсети допустимо взять частные IP адреса? Маску выберите из расчета максимум 40-50 хостов внутри подсети.  
+
+~~если не будет прямого выхода в интернет то любые адреса можно брать, с маской /26~~    
+ у нас есть такие рекомендованые диапазоны для локальной сети:  
+	10.10.0.0 – 10.255.255.255 – сеть класса A, возможно до 16121856 различных адресов хостов.   
+
+	172.16.0.0 – 172.31.255.255 – группа 16-ти смежных сетей класса B, можно использовать до различных 1048576 адресов хостов.  
+
+	192.168.0.0 – 192.168.255.255 – группа 16-ти смежных сетей класса C, возможно до различных 65536 адресов хостов.  
+
+Думаю можно взять из 192.168.1.0 с маской/26.  
+
+## 7. Как проверить ARP таблицу в Linux, Windows? Как очистить ARP кеш полностью? Как из ARP таблицы удалить только один нужный IP?  
+
+Windows:  
+arp -a  
+
+Linux:   
+arp -a  
+и утилита arp-scan   
+
+Для полной очистки таблицы(windows, linux):  
+arp -d   
+для удаления строки arp -d [имя хоста или его IP]  
