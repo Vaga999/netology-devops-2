@@ -1,147 +1,103 @@
-# Домашнее задание к занятию 3.9. Элементы безопасности информационных систем    
+### Как сдавать задания
 
-## 1. Установите Bitwarden плагин для браузера. Зарегестрируйтесь и сохраните несколько паролей.    
+Вы уже изучили блок «Системы управления версиями», и начиная с этого занятия все ваши работы будут приниматься ссылками на .md-файлы, размещённые в вашем публичном репозитории.
 
-сделано.  
-![](скрин 1й)  
+Скопируйте в свой .md-файл содержимое этого файла; исходники можно посмотреть [здесь](https://raw.githubusercontent.com/netology-code/sysadm-homeworks/devsys10/04-script-01-bash/README.md). Заполните недостающие части документа решением задач (заменяйте `???`, ОСТАЛЬНОЕ В ШАБЛОНЕ НЕ ТРОГАЙТЕ чтобы не сломать форматирование текста, подсветку синтаксиса и прочее, иначе можно отправиться на доработку) и отправляйте на проверку. Вместо логов можно вставить скриншоты по желани.
 
-## 2. Установите Google authenticator на мобильный телефон. Настройте вход в Bitwarden акаунт через Google authenticator OTP.    
-
-сделано.  
-![](скрин 2й)  
+---
 
 
-## 3. Установите apache2, сгенерируйте самоподписанный сертификат, настройте тестовый сайт для работы по HTTPS.  
+# Домашнее задание к занятию "4.1. Командная оболочка Bash: Практические навыки"
 
-~~(делалось по https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-18-04-ru?__cf_chl_managed_tk__=iXUCb.VP.2SttUCNMOmGo7Le9Iom.Outv7Uy7Hf8QwA-1643112058-0-gaNycGzNDJE)~~  
+## Обязательная задача 1
 
-Установите apache2: сделано  
-![](3й скрин)  
+Есть скрипт:
+```bash
+a=1
+b=2
+c=a+b
+d=$a+$b
+e=$(($a+$b))
+```
 
-сгенерируйте самоподписанный сертификат(сделано)  
+Какие значения переменным c,d,e будут присвоены? Почему?
 
-настройте тестовый сайт (тот который идет с апачем) для работы по HTTPS.  
-
-
-## 4. Проверьте на TLS уязвимости произвольный сайт в интернете (кроме сайтов МВД, ФСБ, МинОбр, НацБанк, РосКосмос, РосАтом, РосНАНО и любых госкомпаний, объектов КИИ, ВПК ... и тому подобное).    
-
-(сслыка на файлы уязвимость)  
-
-## 5. Установите на Ubuntu ssh сервер, сгенерируйте новый приватный ключ. Скопируйте свой публичный ключ на другой сервер. Подключитесь к серверу по SSH-ключу.  
-
-Сделал 2е виртуальные машины. 1я как сервер , 2я как клиент. На клиенте создана пара ключей:    
-ssh-keygen  
-и передана на сервер:  
-ssh-copy-id vagrant@192.168.0.103  
-вывод:  
-vagrant@vagrant:~$ ssh-copy-id vagrant@192.168.0.103  
-/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/vagrant/.ssh/id_rsa.pub"  
-/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed  
-/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys  
-vagrant@192.168.0.103's password:  
-
-Number of key(s) added: 1
-
-Now try logging into the machine, with:   "ssh 'vagrant@192.168.0.103'"  
-and check to make sure that only the key(s) you wanted were added.  
-
-Далее подключаемся к серверу на который отдали ключь:  
- 
-$ ssh vagrant@192.168.0.103  
-
-Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-80-generic x86_64)  
-
- * Documentation:  https://help.ubuntu.com  
- * Management:     https://landscape.canonical.com  
- * Support:        https://ubuntu.com/advantage  
-
-  System information as of Fri 28 Jan 2022 06:14:08 AM UTC  
-
-  System load:  0.0               Processes:             104  
-  Usage of /:   2.7% of 61.31GB   Users logged in:       1  
-  Memory usage: 7%                IPv4 address for eth0: 10.0.2.15  
-  Swap usage:   0%                IPv4 address for eth1: 192.168.0.103  
+| Переменная  | Значение | Обоснование |
+| ------------- | ------------- | ------------- |
+| `c`  | a+b  | к с присвоена строка a+b |
+| `d`  | 1+2  | это строка куда подставили значения a и b |
+| `e`  | 3  | (( )) в таких скобках происходит вычисление целочисленных выражений |
 
 
-This system is built by the Bento project by Chef Software  
-More information can be found at https://github.com/chef/bento  
-Last login: Fri Jan 28 06:05:18 2022 from 192.168.0.104 
+## Обязательная задача 2
+На нашем локальном сервере упал сервис и мы написали скрипт, который постоянно проверяет его доступность, записывая дату проверок до тех пор, пока сервис не станет доступным (после чего скрипт должен завершиться). В скрипте допущена ошибка, из-за которой выполнение не может завершиться, при этом место на Жёстком Диске постоянно уменьшается. Что необходимо сделать, чтобы его исправить:
+```bash
+while ((1==1)
+do
+	curl https://localhost:4757
+	if (($? != 0))
+	then
+		date >> curl.log
+	fi
+done
+```
 
-Это значит подключение произошло.   
+### Ваш скрипт:
+```bash
+while ((1==1))
+do
+	curl https://localhost:4757
+	if (($? != 0))
+	then
+		date >> curl.log
+	else exit
+	fi
+	sleep 5
+done
+```
 
-## 6. Переименуйте файлы ключей из задания 5. Настройте файл конфигурации SSH клиента, так чтобы вход на удаленный сервер осуществлялся по имени сервера.    
+## Обязательная задача 3
+Необходимо написать скрипт, который проверяет доступность трёх IP: `192.168.0.1`, `173.194.222.113`, `87.250.250.242` по `80` порту и записывает результат в файл `log`. Проверять доступность необходимо пять раз для каждого узла.
 
-Переименуйте файлы ключей из задания 5. Тут непонятки : Надо сам файл ключа на сервере переименовать?  
+### Ваш скрипт:
+```bash
+hosts=(192.168.0.1 173.194.222.113 87.250.250.24)
+timeout=5
+for i in {1..5}
+do
+date >>hosts.log
+    for h in ${hosts[@]}
+    do
+	curl -Is --connect-timeout $timeout $h:80 >/dev/null
+        echo "    check" $h status=$? >>hosts.log
+    done
+done
+```
 
-Настройте файл конфигурации SSH клиента, так чтобы вход на удаленный сервер осуществлялся по имени сервера.- Сделано.      
+## Обязательная задача 4
+Необходимо дописать скрипт из предыдущего задания так, чтобы он выполнялся до тех пор, пока один из узлов не окажется недоступным. Если любой из узлов недоступен - IP этого узла пишется в файл error, скрипт прерывается.
 
-На клиентской машине в файл hosts вписан адрес хоста и имя:  
-vagrant@vagrant:/etc$ sudo nano hosts  
+### Ваш скрипт:
+```bash
+while (($res == 0))
+do
+    for h in ${hosts[@]}
+    do
+	curl -Is --connect-timeout $timeout $h:80 >/dev/null
+	res=$?
+	if (($res != 0))
+	then
+	    echo "    ERROR on " $h status=$res >>hosts2.log
+	fi
+    done
+done
+```
 
-127.0.0.1       localhost  
-127.0.1.1       vagrant.vm      vagrant  
-192.168.0.101   vagrant.vm      vagrant1  <<<эта строка добавлена    
+## Дополнительное задание (со звездочкой*) - необязательно к выполнению
 
-\# The following lines are desirable for IPv6 capable hosts    
-::1     localhost ip6-localhost ip6-loopback  
-ff02::1 ip6-allnodes  
-ff02::2 ip6-allrouters  
+Мы хотим, чтобы у нас были красивые сообщения для коммитов в репозиторий. Для этого нужно написать локальный хук для git, который будет проверять, что сообщение в коммите содержит код текущего задания в квадратных скобках и количество символов в сообщении не превышает 30. Пример сообщения: \[04-script-01-bash\] сломал хук.
 
-далее на клиенте вводим:  ssh vagrant@vagrant1  
-
-и происходит подключение:  
-
-vagrant@vagrant:/etc$ ssh vagrant@vagrant1  
-The authenticity of host 'vagrant1 (192.168.0.101)' can't be established.  
-ECDSA key fingerprint is SHA256:wSHl+h4vAtTT7mbkj2lbGyxWXWTUf6VUliwpncjwLPM.  
-Are you sure you want to continue connecting (yes/no/[fingerprint])? y  
-Please type 'yes', 'no' or the fingerprint: yes  
-Warning: Permanently added 'vagrant1' (ECDSA) to the list of known hosts.  
-Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-80-generic x86_64)  
-
- * Documentation:  https://help.ubuntu.com  
- * Management:     https://landscape.canonical.com  
- * Support:        https://ubuntu.com/advantage  
-
-  System information as of Sat 29 Jan 2022 05:03:18 PM UTC  
-
-  System load:  0.08              Processes:             114  
-  Usage of /:   2.7% of 61.31GB   Users logged in:       1  
-  Memory usage: 7%                IPv4 address for eth0: 10.0.2.15  
-  Swap usage:   0%                IPv4 address for eth1: 192.168.0.101  
-
-
-This system is built by the Bento project by Chef Software  
-More information can be found at https://github.com/chef/bento  
-Last login: Sat Jan 29 17:01:18 2022 from 10.0.2.2  
-vagrant@vagrant:~$ logout  
-
-## 6. Соберите дамп трафика утилитой tcpdump в формате pcap, 100 пакетов. Откройте файл pcap в Wireshark.    
-
-Для сбора трафика:  
-sudo tcpdump -c 100 -w dump.pcap (единственное непонял почему надо нажать enter для того чтоб все выполнилось, а то после запуска команды терминал ни чего не отображает (пример скрин))    
-
-получаем  файл(ссылку на dump.pcap)  
-
-Откройте файл pcap в Wireshark. сделано  
-![](ссылка 6й)  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### Ваш скрипт:
+```bash
+???
+```
