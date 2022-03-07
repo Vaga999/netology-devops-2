@@ -116,11 +116,56 @@
 
       sudo docker exec -it centos-ds3 /bin/bash
 
-## Вот тут у меня возникло непонимание как делать: Как я понял надо сделать Один контейнет на базе centos второй на из debean подключить к ним одну и туже папку а потом создать файл из хостовой и из 1ого контейнера , а во втором проверить содержимое. Правильно понимаю???
+Делаем папку на хосте и файл:
+      
+      vagrant@vagrant:/vagrant/docker/data$ nano FileHost
 
-## И вопрос еще: когда пытаюсь создать папку контейнере или посмотреть что там есть  то говорит неизвестная команда , например:
+и подключаем ее к контейнеру и проверяем:
 
-		[root@38a693c5171c /]# ls -la
-		bash: $'\320\264\321\213ls': command not found
+      vagrant@vagrant:/$ sudo docker run -dit --name centos-ds3 -p 8080:80 -v /vagrant/docker/data:/data  centos
+      vagrant@vagrant:/vagrant/docker/data$ sudo docker exec -it centos-ds3 sh
+      sh-4.4# cd /data
+      sh-4.4# ls -la
+      total 5
+      drwxrwxrwx 1 1000 1000    0 Mar  7 03:36 .
+      drwxr-xr-x 1 root root 4096 Mar  7 03:33 ..
+      -rwxrwxrwx 1 1000 1000    6 Mar  7 03:36 FileHost  
 
-## Как я понял тут не хватает чегото в контейнере, в какую сторону мне копать чтоб я смог выполнить?   
+тут же создаем файл :  
+
+      sh-4.4# cd /data
+      sh-4.4# nano /data/centOSfile
+      sh-4.4# ls -la
+      total 5
+      drwxrwxrwx 1 1000 1000    0 Mar  7 05:03 .
+      drwxr-xr-x 1 root root 4096 Mar  7 03:33 ..
+      -rwxrwxrwx 1 1000 1000    6 Mar  7 03:36 FileHost
+      -rwxrwxrwx 1 1000 1000    8 Mar  7 05:03 centOSfile
+      sh-4.4# cat centOSfile
+      cent_os
+
+скачиваем образ:
+
+      vagrant@vagrant://$ docker pull debian
+      vagrant@vagrant://$ sudo docker images
+      vagrant@vagrant://$ sudo docker images
+      REPOSITORY                     TAG               IMAGE ID       CREATED        SIZE
+      debian                         latest            d40157244907   6 days ago     124MB
+      vagrant@vagrant://$ sudo docker run -dit --name debian-ds3 -v /vagrant/docker/data:/data debian
+      5512818d5c3b84ee988ae7b55dfeba5551ec3fffc570b02e7d6110af27426330
+      vagrant@vagrant://$ sudo docker ps -a
+      CONTAINER ID   IMAGE     COMMAND       CREATED         STATUS        PORTS                                   NAMES
+      5512818d5c3b   debian    "bash"        3 seconds ago   Up 1 second                                           debian-ds3
+      519e13d125a2   centos    "/bin/bash"   2 hours ago     Up 2 hours    0.0.0.0:8080->80/tcp, :::8080->80/tcp   centos-ds3
+      vagrant@vagrant://$ sudo docker exec -it debian-ds3 sh
+      #
+проверяем подключение папки :
+ 
+      # cd /data
+      # ls -la
+      total 5
+      drwxrwxrwx 1 1000 1000    0 Mar  7 05:03 .
+      drwxr-xr-x 1 root root 4096 Mar  7 05:28 ..
+      -rwxrwxrwx 1 1000 1000    6 Mar  7 03:36 FileHost
+      -rwxrwxrwx 1 1000 1000    8 Mar  7 05:03 centOSfile
+      #
