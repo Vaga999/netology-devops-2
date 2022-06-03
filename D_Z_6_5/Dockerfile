@@ -18,8 +18,7 @@ RUN export ES_HOME="/var/lib/elasticsearch" && \
     yum clean all
 
 
-#COPY --chown=elasticsearch:elasticsearch config/* /var/lib/elasticsearch/config/
-COPY --chown=elasticsearch:elasticsearch elasticsearch.yml /var/lib/elasticsearch/config/
+COPY --chown=elasticsearch:elasticsearch config/* /var/lib/elasticsearch/config/
     
 USER 1000
 
