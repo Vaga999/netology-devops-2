@@ -38,9 +38,8 @@
 	Далее мы будем работать с данным экземпляром elasticsearch.
 </details> 
 ### Сделано  
-В ответе приведите:
 
-текст Dockerfile манифеста  
+В ответе приведите текст Dockerfile манифеста  
 <details>
     <summary>Dockerfile</summary>
 
