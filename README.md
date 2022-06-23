@@ -76,7 +76,7 @@
 
 ссылку на образ в репозитории dockerhub  
 
-		dockerhub не позволяет выкладывает образ.
+		docker pull vaga991/vaga991
 		
 		
 ответ elasticsearch на запрос пути / в json виде  
